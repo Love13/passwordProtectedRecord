@@ -1,0 +1,60 @@
+<template >
+
+        <lightning-card title={app.Name} class="card-tile">
+
+            <div slot="actions">
+                
+                <lightning-button-icon
+                    icon-name="utility:search"
+                    icon-class="card-tile-button"
+                    variant="bare"
+                    alternative-text="Open record"
+                    onclick={handleOpenRecordClick}>
+                </lightning-button-icon>
+                
+            </div>
+
+            <div class="slds-p-horizontal_medium">
+
+                <div class="slds-media">
+                    
+                    <div class="slds-media__body">
+
+                        <p class="slds-m-bottom_xx-small"><b>Account:</b> {app.Account__r.Name}</p>
+                        <p class="slds-m-bottom_xx-small"><b>Contact:</b> {app.Contact__r.Name}</p>
+                        <p class="slds-m-bottom_xx-small"><b>Status:</b> {app.Status__c}</p>
+                        <!-- <lightning-progress-ring value={app.percent__c} size="large" variant="base-autocomplete"> </lightning-progress-ring> -->
+                        
+                        <template if:true={isDenied}>
+
+                            <lightning-progress-ring
+                                value="100"
+                                variant="expired"
+                                size="large">
+                            </lightning-progress-ring>
+
+                        </template>
+
+                        <template if:false={isDenied}>
+
+                            <lightning-progress-ring
+                                value={app.percent__c}
+                                size="large"
+                                variant="base-autocomplete">
+                            </lightning-progress-ring>
+
+                        </template>
+
+                        <lightning-slider label="Percent Complete" value={app.percent__c} disabled></lightning-slider>
+
+                        <lightning-progress-bar style="background-color:chartreuse" value={app.percent__c} size="large" variant="circular"></lightning-progress-bar>
+
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+        </lightning-card>
+
+</template>
